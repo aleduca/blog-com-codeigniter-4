@@ -1,8 +1,6 @@
 <?= $this->extend('master') ?>
 
 <?= $this->section('content') ?>
-<main id="main">
-
     <!-- ======= Hero Slider Section ======= -->
     <section id="hero-slider" class="hero-slider">
       <div class="container-md" data-aos="fade-in">
