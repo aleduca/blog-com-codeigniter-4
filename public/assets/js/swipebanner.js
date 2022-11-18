@@ -18,5 +18,4 @@ export function swipe(className) {
       prevEl: ".custom-swiper-button-prev",
     },
   });
-  console.log('swipe loaded');
 }
