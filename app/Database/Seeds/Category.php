@@ -14,7 +14,7 @@ class Category extends Seeder
             $department = $faker->departmentName;
             $data = [
                 'name' => $department,
-                'slug' => strtolower(str_replace('', '-', $department)),
+                'slug' => strtolower(str_replace(' ', '-', $department)),
             ];
 
             $this->db->table('categories')->insert($data);
