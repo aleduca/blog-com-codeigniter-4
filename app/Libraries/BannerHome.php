@@ -6,6 +6,6 @@ class BannerHome
 {
     public function load()
     {
-        return view('fetch/_bannerHome');
+        return view('_partials/_bannerHome');
     }
 }

@@ -6,6 +6,6 @@ class BannerHome extends BaseController
 {
     public function index()
     {
-        return view('fetch/_bannerHome');
+        return view('_partials/_bannerHome');
     }
 }
