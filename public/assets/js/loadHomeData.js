@@ -2,7 +2,7 @@ import {swipe} from '/assets/js/swipeBanner.js';
 
 async function loadHomeData(){
   var bannerHome = document.querySelector('._bannerHome');
-  var trending = document.querySelector('._trending');
+  var recent = document.querySelector('._recent');
 
   const responses = await Promise.all([
     await fetch('/banner/home', { method: 'get' }),
@@ -15,8 +15,10 @@ async function loadHomeData(){
   const recentHtml = await responses[2].text();
 
   bannerHome.innerHTML = bannerHtml;
-  trending.innerHTML = trendingHtml;
   recent.innerHTML = recentHtml;
+
+  var trending = document.querySelector('._trending');
+  trending.innerHTML = trendingHtml;
 
   // // !! load banner home
   // const dataBanner = await fetch('/banner/home',{method:'get'});
