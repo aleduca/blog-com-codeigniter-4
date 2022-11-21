@@ -11,12 +11,12 @@
     </section> <!-- End Post Grid Section -->
 
     <!-- ======= Culture Category Section ======= -->
-    <section class="category-section">
-      
+    <section class="category-section _category_culture">
+     
     </section><!-- End Culture Category Section -->
 
     <!-- ======= Business Category Section ======= -->
-    <section class="category-section _category_culture">
+    <section class="category-section">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header d-flex justify-content-between align-items-center mb-5">

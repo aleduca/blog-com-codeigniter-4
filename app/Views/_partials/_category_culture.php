@@ -1,5 +1,4 @@
 <div class="container" data-aos="fade-up">
-
   <div class="section-header d-flex justify-content-between align-items-center mb-5">
     <h2>Culture</h2>
     <div><a href="category.html" class="more">See All Culture</a></div>
@@ -91,4 +90,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> 
