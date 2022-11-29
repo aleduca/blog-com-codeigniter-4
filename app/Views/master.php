@@ -24,6 +24,7 @@
   <!-- Template Main CSS Files -->
   <link href="<?php echo base_url('assets/css/variables.css') ?>" rel="stylesheet">
   <link href="<?php echo base_url('assets/css/main.css') ?>" rel="stylesheet">
+  <?= $this->renderSection('css') ?>
 </head>
 <body>
     <?= $this->include('partials/header') ?>

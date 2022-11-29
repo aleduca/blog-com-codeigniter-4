@@ -1,0 +1,35 @@
+._container {
+  background-color: white;
+  border-radius: 0.9rem;
+  text-decoration: none;
+  opacity: 0.5;
+}
+
+._container span {
+  background-color: gray;
+  color: gray !important;
+  ;
+}
+
+._container p {
+  background-color: gray;
+  color: gray !important;
+  ;
+}
+
+._container h2 {
+  background-color: gray;
+  color: gray !important;
+  ;
+}
+
+._container h3 {
+  background-color: gray;
+  color: gray !important;
+  ;
+}
+
+._container a {
+  background-color: gray;
+  color: gray !important;
+}
