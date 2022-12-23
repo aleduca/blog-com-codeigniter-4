@@ -1,16 +1,17 @@
 <div class="container" data-aos="fade-up">
   <div class="row g-5">
     <div class="col-lg-4">
+      <?php $post = $recent[0]; ?>
       <div class="post-entry-1 lg">
-        <a href="single-post.html"><img src="assets/img/post-landscape-1.jpg" alt="" class="img-fluid"></a>
-        <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-        <h2><a href="single-post.html">11 Work From Home Part-Time Jobs You Can Do Now</a></h2>
-        <p class="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero temporibus repudiandae, inventore pariatur numquam cumque possimus exercitationem? Nihil tempore odit ab minus eveniet praesentium, similique blanditiis molestiae ut saepe perspiciatis officia nemo, eos quae cumque. Accusamus fugiat architecto rerum animi atque eveniet, quo, praesentium dignissimos</p>
+        <a href="single-post.html"><img src="<?php echo $post->image ?>" alt="" class="img-fluid"></a>
+        <div class="post-meta"><span class="date"><?php echo $post->categoryName ?></span> <span class="mx-1">&bullet;</span> <span><?php echo date('d/m/Y H:i:s', strtotime($post->created_at))  ?></span></div>
+        <h2><a href="single-post.html"><?php echo $post->title; ?></a></h2>
+        <p class="mb-4 d-block"><?php echo word_limiter($post->description, 20) ?></p>
 
         <div class="d-flex align-items-center author">
           <div class="photo"><img src="assets/img/person-1.jpg" alt="" class="img-fluid"></div>
           <div class="name">
-            <h3 class="m-0 p-0">Cameron Williamson</h3>
+            <h3 class="m-0 p-0"><?php echo $post->userFirstName ?> <?php echo $post->userLastName ?></h3>
           </div>
         </div>
       </div>
@@ -20,49 +21,36 @@
     <div class="col-lg-8">
       <div class="row g-5">
         <div class="col-lg-4 border-start custom-border">
-          <div class="post-entry-1">
-            <a href="single-post.html"><img src="assets/img/post-landscape-2.jpg" alt="" class="img-fluid"></a>
-            <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-            <h2><a href="single-post.html">Let’s Get Back to Work, New York</a></h2>
-          </div>
-          <div class="post-entry-1">
-            <a href="single-post.html"><img src="assets/img/post-landscape-5.jpg" alt="" class="img-fluid"></a>
-            <div class="post-meta"><span class="date">Food</span> <span class="mx-1">&bullet;</span> <span>Jul 17th '22</span></div>
-            <h2><a href="single-post.html">How to Avoid Distraction and Stay Focused During Video Calls?</a></h2>
-          </div>
-          <div class="post-entry-1">
-            <a href="single-post.html"><img src="assets/img/post-landscape-7.jpg" alt="" class="img-fluid"></a>
-            <div class="post-meta"><span class="date">Design</span> <span class="mx-1">&bullet;</span> <span>Mar 15th '22</span></div>
-            <h2><a href="single-post.html">Why Craigslist Tampa Is One of The Most Interesting Places On the Web?</a></h2>
-          </div>
+          <?php $posts = array_slice($recent, 1, 3); ?>
+          <?php foreach ($posts as $post) : ?>
+            <div class="post-entry-1">
+              <a href="single-post.html"><img src="<?php echo $post->image ?>" alt="" class="img-fluid"></a>
+              <div class="post-meta"><span class="date"><?php echo $post->categoryName; ?></span> <span class="mx-1">&bullet;</span> <span><?php echo date('d/m/Y H:i:s', strtotime($post->created_at)) ?></span></div>
+              <h2><a href="single-post.html"><?php echo $post->title; ?></a></h2>
+            </div>
+          <?php endforeach; ?>
         </div>
         <div class="col-lg-4 border-start custom-border">
-          <div class="post-entry-1">
-            <a href="single-post.html"><img src="assets/img/post-landscape-3.jpg" alt="" class="img-fluid"></a>
-            <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-            <h2><a href="single-post.html">6 Easy Steps To Create Your Own Cute Merch For Instagram</a></h2>
-          </div>
-          <div class="post-entry-1">
-            <a href="single-post.html"><img src="assets/img/post-landscape-6.jpg" alt="" class="img-fluid"></a>
-            <div class="post-meta"><span class="date">Tech</span> <span class="mx-1">&bullet;</span> <span>Mar 1st '22</span></div>
-            <h2><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should Know</a></h2>
-          </div>
-          <div class="post-entry-1">
-            <a href="single-post.html"><img src="assets/img/post-landscape-8.jpg" alt="" class="img-fluid"></a>
-            <div class="post-meta"><span class="date">Travel</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-            <h2><a href="single-post.html">5 Great Startup Tips for Female Founders</a></h2>
-          </div>
+          <?php $posts = array_slice($recent, 4, 6); ?>
+          <?php foreach ($posts as $post) : ?>
+            <div class="post-entry-1">
+              <a href="single-post.html"><img src="<?php echo $post->image ?>" alt="" class="img-fluid"></a>
+              <div class="post-meta"><span class="date"><?php echo $post->categoryName; ?></span> <span class="mx-1">&bullet;</span> <span><?php echo date('d/m/Y H:i:s', strtotime($post->created_at)) ?></span></div>
+              <h2><a href="single-post.html"><?php echo $post->title; ?></a></h2>
+            </div>
+          <?php endforeach; ?>
+
         </div>
 
         <!-- Trending Section -->
         <div class="col-lg-4">
 
           <div class="trending _trending">
-              <include-fragment src="/trendings">
-                <div class="_container">
-                  <?php echo $this->include('_placeholders/_trendings') ?>
-                </div>
-              </include-fragment>
+            <include-fragment src="/trendings">
+              <div class="_container">
+                <?php echo $this->include('_placeholders/_trendings') ?>
+              </div>
+            </include-fragment>
           </div>
 
         </div> <!-- End Trending Section -->
