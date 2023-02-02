@@ -8,7 +8,7 @@ $routes = Services::routes();
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
 if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
-    require SYSTEMPATH . 'Config/Routes.php';
+  require SYSTEMPATH . 'Config/Routes.php';
 }
 
 /*
@@ -40,7 +40,8 @@ $routes->get('/search', 'Search::index', ['as' => 'search']);
 $routes->get('/banner/home', 'BannerHome::index');
 $routes->get('/trendings', 'Trending::index');
 $routes->get('/recent', 'Recent::index');
-$routes->get('/category/(:alpha)', 'Category::index/$1');
+$routes->get('/category/partials/(:alpha)', 'CategoryPartials::index/$1');
+$routes->get('/category/(:any)', 'Category::index/$1');
 
 /*
  * --------------------------------------------------------------------
@@ -56,5 +57,5 @@ $routes->get('/category/(:alpha)', 'Category::index/$1');
  * needing to reload it.
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+  require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
