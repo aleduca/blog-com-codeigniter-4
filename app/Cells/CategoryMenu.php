@@ -4,12 +4,12 @@ namespace App\Cells;
 
 use App\Models\Category as CategoryModel;
 
-class Category
+class CategoryMenu
 {
-  public function render()
+  public function render(string $view)
   {
     $category = new CategoryModel();
     $categories = $category->select('name,slug')->findAll();
-    return view('partials/cell/category', ['categories' => $categories]);
+    return view("partials/cell/{$view}", ['categories' => $categories]);
   }
 }

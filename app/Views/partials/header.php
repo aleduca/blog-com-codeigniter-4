@@ -12,7 +12,7 @@
         <li><a href="/">Blog</a></li>
         <li><a href="single-post.html">Single Post</a></li>
         <li class="dropdown"><a href="#"><span>Categories</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-          <?php echo view_cell("App\Cells\Category::render"); ?>
+          <?php echo view_cell("App\Cells\CategoryMenu::render", ['view' => 'category_menu']); ?>
         </li>
 
         <li><a href="about.html">About</a></li>
