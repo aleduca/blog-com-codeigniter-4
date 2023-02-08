@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo esc($title ?? 'Blog com CodeIgniter 4') ?></title>
-   <!-- Favicons -->
+  <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -24,13 +25,16 @@
   <!-- Template Main CSS Files -->
   <link href="<?php echo base_url('assets/css/variables.css') ?>" rel="stylesheet">
   <link href="<?php echo base_url('assets/css/main.css') ?>" rel="stylesheet">
+  <link rel="stylesheet" href="<?php echo base_url('assets/css/fragment.css'); ?>">
   <?= $this->renderSection('css') ?>
 </head>
+
 <body>
-    <?= $this->include('partials/header') ?>
-    <main id="main">
-      <?= $this->renderSection('content') ?>
-    </main>
-    <?= $this->include('partials/footer') ?>
+  <?= $this->include('partials/header') ?>
+  <main id="main">
+    <?= $this->renderSection('content') ?>
+  </main>
+  <?= $this->include('partials/footer') ?>
 </body>
+
 </html>

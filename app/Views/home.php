@@ -1,9 +1,5 @@
 <?= $this->extend('master') ?>
 
-<?= $this->section('css') ?>
-<link rel="stylesheet" href="<?php echo base_url('assets/css/fragment.css'); ?>">
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
 <!-- ======= Hero Slider Section ======= -->
 <!-- view_cell('App\Libraries\BannerHome::load')  -->
@@ -41,10 +37,6 @@
 
 <?= $this->section('js') ?>
 
-<script type="module">
-  import 'https://unpkg.com/@github/include-fragment-element';
-  import '/assets/js/loadHomeData.js';
-  // import '/assets/js/build/fragment.js';
-</script>
+<script type="module" src="/assets/js/loadHomeData.js"></script>
 
 <?= $this->endSection() ?>

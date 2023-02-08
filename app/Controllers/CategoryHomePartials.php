@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Post;
 
-class CategoryPartials extends BaseController
+class CategoryHomePartials extends BaseController
 {
 
   private array $categories = [
