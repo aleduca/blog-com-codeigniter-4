@@ -10,7 +10,7 @@ class Trending extends BaseController
   {
     $post = new Post();
     $posts = $post->select('
-      posts.title, users.firstName as userFirstName, users.lastName as userLastName
+      posts.title,posts.slug, users.firstName as userFirstName, users.lastName as userLastName
     ')->orderBy(
       'visits',
       'desc'

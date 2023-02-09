@@ -43,6 +43,7 @@ $routes->get('/trendings', 'Trending::index');
 $routes->get('/recent', 'Recent::index');
 $routes->get('/category/partials/(:alpha)', 'CategoryHomePartials::index/$1');
 $routes->get('/category/(:any)', 'Category::index/$1');
+$routes->get('/post/(:any)', 'Post::index/$1');
 
 /*
  * --------------------------------------------------------------------

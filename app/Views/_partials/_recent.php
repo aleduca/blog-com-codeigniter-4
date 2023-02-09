@@ -3,9 +3,9 @@
     <div class="col-lg-4">
       <?php $post = $recent[0]; ?>
       <div class="post-entry-1 lg">
-        <a href="single-post.html"><img src="<?php echo $post->image ?>" alt="" class="img-fluid"></a>
+        <a href="/post/<?php echo $post->slug; ?>"><img src="<?php echo $post->image ?>" alt="" class="img-fluid"></a>
         <div class="post-meta"><span class="date"><?php echo $post->categoryName ?></span> <span class="mx-1">&bullet;</span> <span><?php echo date('d/m/Y H:i:s', strtotime($post->created_at))  ?></span></div>
-        <h2><a href="single-post.html"><?php echo $post->title; ?></a></h2>
+        <h2><a href="/post/<?php echo $post->slug; ?>"><?php echo $post->title; ?></a></h2>
         <p class="mb-4 d-block"><?php echo word_limiter($post->description, 20) ?></p>
 
         <div class="d-flex align-items-center author">
@@ -24,9 +24,9 @@
           <?php $posts = array_slice($recent, 1, 3); ?>
           <?php foreach ($posts as $post) : ?>
             <div class="post-entry-1">
-              <a href="single-post.html"><img src="<?php echo $post->image ?>" alt="" class="img-fluid"></a>
+              <a href="/post/<?php echo $post->slug; ?>"><img src="<?php echo $post->image ?>" alt="" class="img-fluid"></a>
               <div class="post-meta"><span class="date"><?php echo $post->categoryName; ?></span> <span class="mx-1">&bullet;</span> <span><?php echo date('d/m/Y H:i:s', strtotime($post->created_at)) ?></span></div>
-              <h2><a href="single-post.html"><?php echo $post->title; ?></a></h2>
+              <h2><a href="s<?php echo $post->slug; ?>"><?php echo $post->title; ?></a></h2>
             </div>
           <?php endforeach; ?>
         </div>
@@ -34,9 +34,9 @@
           <?php $posts = array_slice($recent, 4, 6); ?>
           <?php foreach ($posts as $post) : ?>
             <div class="post-entry-1">
-              <a href="single-post.html"><img src="<?php echo $post->image ?>" alt="" class="img-fluid"></a>
+              <a href="/post/<?php echo $post->slug; ?>"><img src="<?php echo $post->image ?>" alt="" class="img-fluid"></a>
               <div class="post-meta"><span class="date"><?php echo $post->categoryName; ?></span> <span class="mx-1">&bullet;</span> <span><?php echo date('d/m/Y H:i:s', strtotime($post->created_at)) ?></span></div>
-              <h2><a href="single-post.html"><?php echo $post->title; ?></a></h2>
+              <h2><a href="<?php echo $post->slug; ?>"><?php echo $post->title; ?></a></h2>
             </div>
           <?php endforeach; ?>
 
