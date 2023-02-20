@@ -35,7 +35,7 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index', ['as' => 'home']);
 $routes->get('/search', 'Search::index', ['as' => 'search']);
 $routes->get('/banner/home', 'BannerHome::index');
 $routes->get('/category/sidebar/partials/(:alpha)', 'CategorySidebarPartials::index/$1');
@@ -44,6 +44,9 @@ $routes->get('/recent', 'Recent::index');
 $routes->get('/category/partials/(:alpha)', 'CategoryHomePartials::index/$1');
 $routes->get('/category/(:any)', 'Category::index/$1');
 $routes->get('/post/(:any)', 'Post::index/$1');
+$routes->get('/login', 'Login::index', ['as' => 'login']);
+$routes->post('/login', 'Login::store', ['as' => 'login.store']);
+$routes->get('/logout', 'Login::destroy');
 
 /*
  * --------------------------------------------------------------------
