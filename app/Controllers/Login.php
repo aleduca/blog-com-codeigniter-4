@@ -43,6 +43,7 @@ class Login extends BaseController
     }
 
     $userInfo = new stdClass;
+    $userInfo->id = $user->id;
     $userInfo->firstName = $user->firstName;
     $userInfo->lastName = $user->lastName;
     $userInfo->email = $user->email;

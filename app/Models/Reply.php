@@ -44,7 +44,7 @@ class Reply extends Model
   public function replies(array $commentsIds)
   {
     return $this->select(
-      'replies.id,replies.comment,users.firstName as userFirstName, users.lastName as userLastName, users.image as avatar,replies.created_at,replies.comment_id'
+      'replies.id,replies.comment,users.firstName as userFirstName,users.id as userId,users.lastName as userLastName,users.image as avatar,replies.created_at,replies.comment_id'
     )->join(
       'users',
       'users.id = replies.user_id'

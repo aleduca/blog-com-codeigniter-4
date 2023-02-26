@@ -44,7 +44,7 @@ class Comment extends Model
   public function comments(int $postId)
   {
     $comments = $this->select(
-      'comments.id,comments.comment,users.firstName as userFirstName, users.lastName as userLastName,users.image as avatar,comments.created_at'
+      'comments.id,comments.comment,users.firstName as userFirstName,users.id as userId,users.lastName as userLastName,users.image as avatar,comments.created_at'
     )->join(
       'users',
       'users.id = comments.user_id'
@@ -66,13 +66,21 @@ class Comment extends Model
 
     $commentsData = new stdClass;
     foreach ($comments as $index => $comment) {
+      // $comment->isAuthor = !session()->has('auth') ? false : (session()->get('user')->id === $comment->userId ? true : false);
       $commentsData->comments[] = $comment;
-      foreach ($replies as $reply) {
+      $commentsData->comments[$index]->isAuthor = !session()->has('auth') ? false : (session()->get('user')->id === $comment->userId ? true : false);
+      foreach ($replies as $indexReply => $reply) {
         if ($comment->id === $reply->comment_id) {
-          $commentsData->comments[$index]->replies[] = $reply;
+          // $reply->isAuthor = !session()->has('auth') ? false : (session()->get('user')->id === $reply->userId ? true : false);
+          $commentsData->comments[$index]->replies[$indexReply] = $reply;
+          $commentsData->comments[$index]->replies[$indexReply]->isAuthor =
+            !session()->has('auth') ? false : (session()->get('user')->id === $reply->userId ? true : false);
         }
       }
     }
+
+    var_dump(session()->get('user')->id, $commentsData->comments[0]);
+    die();
 
     return $commentsData;
   }
