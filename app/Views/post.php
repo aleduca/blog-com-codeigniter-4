@@ -32,6 +32,12 @@
                     </h6>
                     <span class="text-muted">
                       <?php echo CodeIgniter\I18n\Time::parse($comment->created_at)->humanize(); ?>
+                      <?php if (!$comment->isAuthor && session()->has('auth')) : ?>
+                        <button type="button" class="btn btn-outline-primary btn-sm">Reply</button>
+                      <?php endif; ?>
+                      <?php if ($comment->isAuthor) : ?>
+                        <span class="badge bg-dark">My reply <i class="bi bi-star-fill"></i></span>
+                      <?php endif; ?>
                     </span>
                   </div>
                   <div class="comment-body">
@@ -56,6 +62,12 @@
                               </h6>
                               <span class="text-muted">
                                 <?php echo CodeIgniter\I18n\Time::parse($reply->created_at)->humanize(); ?>
+                                <?php if (!$reply->isAuthor && session()->has('auth')) : ?>
+                                  <button type="button" class="btn btn-outline-primary btn-sm">Reply</button>
+                                <?php endif; ?>
+                                <?php if ($reply->isAuthor) : ?>
+                                  <span class="badge bg-dark">My reply <i class="bi bi-star-fill"></i></span>
+                                <?php endif; ?>
                               </span>
                             </div>
                             <div class="reply-body">

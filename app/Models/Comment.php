@@ -79,9 +79,6 @@ class Comment extends Model
       }
     }
 
-    var_dump(session()->get('user')->id, $commentsData->comments[0]);
-    die();
-
     return $commentsData;
   }
 }
