@@ -84,23 +84,7 @@
           </div><!-- End Comments -->
         <?php endif; ?>
 
-        <div class="modal fade" id="modal-comment" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <textarea rows="10" class="w-100" id="modal-comment-text"></textarea>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="btn-send-reply">Send Reply</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php echo $this->include('/partials/modals/replies.php') ?>
 
         <!-- ======= Comments Form ======= -->
         <div class="row justify-content-center mt-5">
@@ -137,62 +121,7 @@
 </section>
 
 <?= $this->section('js') ?>
-<script>
-  const btnReplies = document.querySelectorAll('.btn-reply');
-  const btnSendReply = document.querySelector('#btn-send-reply');
-  const modal = new bootstrap.Modal(document.getElementById('modal-comment'))
-  const modalTitle = document.querySelector('.modal-title')
-
-  btnReplies.forEach(btn => {
-    btn.addEventListener('click', function() {
-
-      modalTitle.textContent = this.textContent;
-
-      btnSendReply.setAttribute('data-id', this.getAttribute('data-id'));
-
-      modal.show();
-    })
-  });
-
-  btnSendReply.addEventListener('click', async function() {
-    const commentId = this.getAttribute('data-id');
-    const reply = document.querySelector('#modal-comment-text');
-    if (!reply.value.length) {
-      alert('Digite uma resposta');
-      return;
-    }
-    this.textContent = 'Enviando resposta, aguarde...';
-    try {
-      const data = await fetch('/api/reply', {
-        method: 'post',
-        headers: {
-          'Content-Type': "application/json",
-          'X-Requested-With': 'XMLHttpRequest'
-        },
-        body: JSON.stringify({
-          commentId,
-          reply: reply.value
-        })
-      })
-
-      const response = await data.json();
-
-      if (response.message === 'replied') {
-        alert('Resposta cadastrada com sucesso');
-        this.textContent = 'Send Reply';
-        reply.value = '';
-      }
-
-      setTimeout(() => {
-        modal.hide();
-      }, 1000);
-
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  })
-</script>
+<script src="/assets/js/replies.js"></script>
 <?= $this->endSection() ?>
 
 <?= $this->endSection() ?>
