@@ -33,7 +33,7 @@
                     <span class="text-muted">
                       <?php echo CodeIgniter\I18n\Time::parse($comment->created_at)->humanize(); ?>
                       <?php if (!$comment->isAuthor && session()->has('auth')) : ?>
-                        <button type="button" class="btn btn-outline-primary btn-sm">Reply</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-reply" data-id="<?php echo $comment->id; ?>">Reply to <?php echo $comment->userFirstName ?></button>
                       <?php endif; ?>
                       <?php if ($comment->isAuthor) : ?>
                         <span class="badge bg-dark">My reply <i class="bi bi-star-fill"></i></span>
@@ -63,7 +63,7 @@
                               <span class="text-muted">
                                 <?php echo CodeIgniter\I18n\Time::parse($reply->created_at)->humanize(); ?>
                                 <?php if (!$reply->isAuthor && session()->has('auth')) : ?>
-                                  <button type="button" class="btn btn-outline-primary btn-sm">Reply</button>
+                                  <button type="button" class="btn btn-outline-primary btn-sm btn-reply" data-id="<?php echo $comment->id; ?>">Reply to <?php echo $reply->userFirstName ?></button>
                                 <?php endif; ?>
                                 <?php if ($reply->isAuthor) : ?>
                                   <span class="badge bg-dark">My reply <i class="bi bi-star-fill"></i></span>
@@ -83,6 +83,24 @@
             <?php endforeach; ?>
           </div><!-- End Comments -->
         <?php endif; ?>
+
+        <div class="modal fade" id="modal-comment" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <textarea rows="10" class="w-100"></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btn-send-reply">Send Reply</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- ======= Comments Form ======= -->
         <div class="row justify-content-center mt-5">
@@ -117,5 +135,29 @@
       </div>
     </div>
 </section>
+
+<?= $this->section('js') ?>
+<script>
+  const btnReplies = document.querySelectorAll('.btn-reply');
+  const btnSendReply = document.querySelector('#btn-send-reply');
+  const modal = new bootstrap.Modal(document.getElementById('modal-comment'))
+  const modalTitle = document.querySelector('.modal-title')
+
+  btnReplies.forEach(btn => {
+    btn.addEventListener('click', function() {
+
+      modalTitle.textContent = this.textContent;
+
+      btnSendReply.setAttribute('data-id', this.getAttribute('data-id'));
+
+      modal.show();
+    })
+  });
+
+  btnSendReply.addEventListener('click', function() {
+    console.log('send reply');
+  })
+</script>
+<?= $this->endSection() ?>
 
 <?= $this->endSection() ?>
