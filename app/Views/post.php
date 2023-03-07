@@ -89,26 +89,33 @@
         <!-- ======= Comments Form ======= -->
         <div class="row justify-content-center mt-5">
 
+          <?php if (session()->has('messageThrottleComment')) : ?>
+            <span style="color:red;font-size:20px"><?php echo session()->getFlashdata('messageThrottleComment'); ?></span>
+          <?php endif; ?>
+
           <div class="col-lg-12">
             <h5 class="comment-title">Leave a Comment</h5>
-            <div class="row">
-              <div class="col-lg-6 mb-3">
-                <label for="comment-name">Name</label>
-                <input type="text" class="form-control" id="comment-name" placeholder="Enter your name">
-              </div>
-              <div class="col-lg-6 mb-3">
-                <label for="comment-email">Email</label>
-                <input type="text" class="form-control" id="comment-email" placeholder="Enter your email">
-              </div>
-              <div class="col-12 mb-3">
-                <label for="comment-message">Message</label>
+            <form action="<?php echo url_to('comment.store') ?>" method="post">
+              <?php echo csrf_field(); ?>
+              <div class="row">
+                <div class="col-lg-6 mb-3">
+                  <label for="comment-name">Name</label>
+                  <input type="text" class="form-control" id="comment-name" placeholder="Enter your name">
+                </div>
+                <div class="col-lg-6 mb-3">
+                  <label for="comment-email">Email</label>
+                  <input type="text" class="form-control" id="comment-email" placeholder="Enter your email">
+                </div>
+                <div class="col-12 mb-3">
+                  <label for="comment-message">Message</label>
 
-                <textarea class="form-control" id="comment-message" placeholder="Enter your name" cols="30" rows="10"></textarea>
+                  <textarea class="form-control" id="comment-message" placeholder="Enter your name" cols="30" rows="10"></textarea>
+                </div>
+                <div class="col-12">
+                  <input type="submit" class="btn btn-primary" value="Post comment">
+                </div>
               </div>
-              <div class="col-12">
-                <input type="submit" class="btn btn-primary" value="Post comment">
-              </div>
-            </div>
+            </form>
           </div>
         </div><!-- End Comments Form -->
 

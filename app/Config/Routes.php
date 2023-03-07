@@ -45,6 +45,7 @@ $routes->get('/category/partials/(:alpha)', 'CategoryHomePartials::index/$1');
 $routes->get('/category/(:any)', 'Category::index/$1');
 $routes->get('/post/(:any)', 'Post::index/$1');
 $routes->post('/api/reply', 'Reply::store');
+$routes->post('/comment', 'Comment::store', ['as' => 'comment.store', 'filter' => 'csrfThrottle']);
 $routes->get('/login', 'Login::index', ['as' => 'login']);
 $routes->post('/login', 'Login::store', ['as' => 'login.store']);
 $routes->get('/logout', 'Login::destroy');
