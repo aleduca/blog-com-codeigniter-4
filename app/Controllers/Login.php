@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\Login as LibrariesLogin;
 use App\Models\User;
 use stdClass;
 
@@ -42,15 +43,7 @@ class Login extends BaseController
       return redirect()->route('login')->with('error', 'Email ou senha inválidos');
     }
 
-    $userInfo = new stdClass;
-    $userInfo->id = $user->id;
-    $userInfo->firstName = $user->firstName;
-    $userInfo->lastName = $user->lastName;
-    $userInfo->email = $user->email;
-    $userInfo->fullName = $user->firstName . ' ' . $user->lastName;
-
-    session()->set('auth', true);
-    session()->set('user', $userInfo);
+    LibrariesLogin::login($user);
 
     return redirect()->route('home');
   }
