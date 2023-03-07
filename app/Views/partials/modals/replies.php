@@ -9,8 +9,8 @@
          <textarea rows="10" class="w-100" id="modal-comment-text"></textarea>
        </div>
        <div class="modal-footer">
-         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         <button type="button" class="btn btn-success" id="btn-send-reply">Send Reply</button>
+         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close <i class="bi bi-x-circle"></i></button>
+         <button type="button" class="btn btn-success" id="btn-send-reply">Send Reply <i class="bi bi-check"></i></button>
        </div>
      </div>
    </div>

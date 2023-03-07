@@ -33,7 +33,7 @@
                     <span class="text-muted">
                       <?php echo CodeIgniter\I18n\Time::parse($comment->created_at)->humanize(); ?>
                       <?php if (!$comment->isAuthor && session()->has('auth')) : ?>
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-reply" data-id="<?php echo $comment->id; ?>">Reply to <?php echo $comment->userFirstName ?></button>
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-reply" data-id="<?php echo $comment->id; ?>">Reply to <?php echo $comment->userFirstName ?> <i class="bi bi-send"></i></button>
                       <?php endif; ?>
                       <?php if ($comment->isAuthor) : ?>
                         <span class="badge bg-dark">My reply <i class="bi bi-star-fill"></i></span>
@@ -63,7 +63,7 @@
                               <span class="text-muted">
                                 <?php echo CodeIgniter\I18n\Time::parse($reply->created_at)->humanize(); ?>
                                 <?php if (!$reply->isAuthor && session()->has('auth')) : ?>
-                                  <button type="button" class="btn btn-outline-primary btn-sm btn-reply" data-id="<?php echo $comment->id; ?>">Reply to <?php echo $reply->userFirstName ?></button>
+                                  <button type="button" class="btn btn-outline-primary btn-sm btn-reply" data-id="<?php echo $comment->id; ?>">Reply to <?php echo $reply->userFirstName ?> <i class="bi bi-send"></i></button>
                                 <?php endif; ?>
                                 <?php if ($reply->isAuthor) : ?>
                                   <span class="badge bg-dark">My reply <i class="bi bi-star-fill"></i></span>
@@ -86,38 +86,48 @@
 
         <?php echo $this->include('/partials/modals/replies.php') ?>
 
-        <!-- ======= Comments Form ======= -->
-        <div class="row justify-content-center mt-5">
+        <?php if (session()->has('auth')) : ?>
+          <!-- ======= Comments Form ======= -->
+          <div class="row justify-content-center mt-5">
 
-          <?php if (session()->has('messageThrottleComment')) : ?>
-            <span style="color:red;font-size:20px"><?php echo session()->getFlashdata('messageThrottleComment'); ?></span>
-          <?php endif; ?>
+            <?php if (session()->has('messageThrottleComment')) : ?>
+              <span style="color:red;font-size:20px"><?php echo session()->getFlashdata('messageThrottleComment'); ?></span>
+            <?php endif; ?>
 
-          <div class="col-lg-12">
-            <h5 class="comment-title">Leave a Comment</h5>
-            <form action="<?php echo url_to('comment.store') ?>" method="post">
-              <?php echo csrf_field(); ?>
-              <div class="row">
-                <div class="col-lg-6 mb-3">
-                  <label for="comment-name">Name</label>
-                  <input type="text" class="form-control" id="comment-name" placeholder="Enter your name">
-                </div>
-                <div class="col-lg-6 mb-3">
-                  <label for="comment-email">Email</label>
-                  <input type="text" class="form-control" id="comment-email" placeholder="Enter your email">
-                </div>
-                <div class="col-12 mb-3">
-                  <label for="comment-message">Message</label>
+            <?php if (session()->has('created')) : ?>
+              <span style="color:green;font-size:20px"><?php echo session()->getFlashdata('created'); ?></span>
+            <?php endif; ?>
 
-                  <textarea class="form-control" id="comment-message" placeholder="Enter your name" cols="30" rows="10"></textarea>
+            <?php if (session()->has('not_created')) : ?>
+              <span style="color:red;font-size:20px"><?php echo session()->getFlashdata('not_created'); ?></span>
+            <?php endif; ?>
+
+            <div class="col-lg-12">
+              <h5 class="comment-title">Leave a Comment</h5>
+              <form action="<?php echo url_to('comment.store') ?>" method="post">
+                <?php echo csrf_field(); ?>
+                <div class="row">
+                  <input type="hidden" name="post_id" value="<?php echo $post->id; ?>">
+                  <?php if (session()->has('errors')) : ?>
+                    <span style="color:red;font-size:20px"><?php echo session()->getFlashdata('errors')['comment'] ?></span>
+                  <?php endif;  ?>
+                  <div class="col-12 mb-3">
+                    <label for="comment-message">Message</label>
+
+                    <textarea class="form-control" name="comment" id="comment-message" placeholder="Enter your comment" cols="30" rows="10"></textarea>
+                  </div>
+                  <div class="col-12">
+                    <input type="submit" class="btn btn-primary" value="Post comment">
+                  </div>
                 </div>
-                <div class="col-12">
-                  <input type="submit" class="btn btn-primary" value="Post comment">
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
+          </div><!-- End Comments Form -->
+        <?php else : ?>
+          <div class="alert alert-danger" style="text-align:center;">
+            Você precisar estar logado para fazer um comentário | <a href="/login">Login</a>
           </div>
-        </div><!-- End Comments Form -->
+        <?php endif; ?>
 
       </div>
       <div class="col-md-3">

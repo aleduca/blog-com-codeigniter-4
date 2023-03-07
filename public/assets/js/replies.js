@@ -38,7 +38,7 @@ btnSendReply.addEventListener("click", async function () {
 
     if (response.message === "replied") {
       alert("Resposta cadastrada com sucesso");
-      this.textContent = "Send Reply";
+      this.innerHTML = "Send Reply <i class='bi bi-check'>";
       reply.value = "";
     }
 
