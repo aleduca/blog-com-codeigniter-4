@@ -21,10 +21,8 @@
               <div class="comment d-flex mb-4">
                 <div class="flex-shrink-0">
                   <div class="avatar avatar-sm rounded-circle">
-                    <<<<<<< HEAD <img class="avatar-img" src="<?php echo $comment->avatar ?? 'https://randomuser.me/api/portraits/lego/5.jpg' ?>" alt="" class="img-fluid">
-                      =======
-                      <img class="avatar-img" src="<?php echo $comment->avatar ?? 'https://randomuser.me/api/portraits/lego/3.jpg' ?>" alt="" class="img-fluid">
-                      >>>>>>> 6aa84b0c115f2e49d82888e30861f5b8fdae9a68
+                    <img class="avatar-img" src="<?php echo $comment->avatar ?? 'https://randomuser.me/api/portraits/lego/5.jpg' ?>" alt="" class="img-fluid">
+
                   </div>
                 </div>
                 <div class="flex-grow-1 ms-2 ms-sm-3">
