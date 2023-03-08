@@ -21,7 +21,7 @@
               <div class="comment d-flex mb-4">
                 <div class="flex-shrink-0">
                   <div class="avatar avatar-sm rounded-circle">
-                    <img class="avatar-img" src="<?php echo $comment->avatar ?>" alt="" class="img-fluid">
+                    <img class="avatar-img" src="<?php echo $comment->avatar ?? 'https://randomuser.me/api/portraits/lego/5.jpg' ?>" alt="" class="img-fluid">
                   </div>
                 </div>
                 <div class="flex-grow-1 ms-2 ms-sm-3">
@@ -41,7 +41,7 @@
                     </span>
                   </div>
                   <div class="comment-body">
-                    <?php echo $comment->comment; ?>
+                    <?php echo nl2br($comment->comment); ?>
                   </div>
 
                   <?php if (isset($comment->replies)) : ?>
@@ -51,7 +51,7 @@
                         <div class="reply d-flex mb-4">
                           <div class="flex-shrink-0">
                             <div class="avatar avatar-sm rounded-circle">
-                              <img class="avatar-img" src="<?php echo $reply->avatar; ?>" alt="" class="img-fluid">
+                              <img class="avatar-img" src="<?php echo $reply->avatar ?? 'https://randomuser.me/api/portraits/lego/5.jpg'; ?>" alt="" class="img-fluid">
                             </div>
                           </div>
                           <div class="flex-grow-1 ms-2 ms-sm-3">
@@ -71,7 +71,7 @@
                               </span>
                             </div>
                             <div class="reply-body">
-                              <?php echo $reply->comment; ?>
+                              <?php echo nl2br($reply->comment); ?>
                             </div>
                           </div>
                         </div>
