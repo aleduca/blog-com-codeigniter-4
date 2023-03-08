@@ -13,7 +13,7 @@ class User extends Model
   protected $insertID         = 0;
   protected $returnType       = 'object';
   protected $useSoftDeletes   = false;
-  protected $protectFields    = true;
+  protected $protectFields    = false;
   protected $allowedFields    = [];
 
   // Dates

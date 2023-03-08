@@ -7,7 +7,7 @@ use stdClass;
 
 class Login
 {
-  public static function login(User $user)
+  public static function login(User|stdClass $user)
   {
     $userInfo = new stdClass;
     $userInfo->id = $user->id;
