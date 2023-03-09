@@ -16,7 +16,9 @@
 
         <li><a href="/contact">Contact</a></li>
         <?php if (session()->has('auth')) : ?>
-          <li><a href="#">Bem vindo, <?php echo session()->get('user')->fullName; ?></a></li>
+          <li><a href="#">
+              <img src="<?php echo session()->get('user')->avatar; ?>" style="margin-right:5px" width="45" height="40" class="rounded-circle" alt="">
+              Bem vindo, <?php echo session()->get('user')->fullName; ?></a></li>
           <li><a href="/logout">Logout</a></li>
         <?php else : ?>
           <li><a href="/login">Login</a></li>

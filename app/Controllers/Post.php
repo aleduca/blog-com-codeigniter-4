@@ -5,8 +5,6 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Comment;
 use App\Models\Post as ModelsPost;
-use App\Models\Reply;
-use stdClass;
 
 class Post extends BaseController
 {
