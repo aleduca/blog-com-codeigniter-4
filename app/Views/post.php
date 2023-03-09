@@ -37,7 +37,7 @@
                         <button type="button" class="btn btn-outline-primary btn-sm btn-reply" data-id="<?php echo $comment->id; ?>">Reply to <?php echo $comment->userFirstName ?> <i class="bi bi-send"></i></button>
                       <?php endif; ?>
                       <?php if ($comment->isAuthor) : ?>
-                        <span class="badge bg-dark">My reply <i class="bi bi-star-fill"></i></span>
+                        <span class="badge bg-dark">My comment <i class="bi bi-star-fill"></i></span>
                       <?php endif; ?>
                     </span>
                   </div>
