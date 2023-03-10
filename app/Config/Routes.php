@@ -48,6 +48,8 @@ $routes->post('/api/reply', 'Reply::store');
 $routes->post('/comment', 'Comment::store', ['as' => 'comment.store', 'filter' => 'csrfThrottle']);
 $routes->get('/register', 'Register::index', ['as' => 'register']);
 $routes->post('/register', 'Register::store', ['as' => 'register.store']);
+$routes->get('/contact', 'Contact::index', ['as' => 'contact']);
+$routes->post('/contact', 'Contact::store', ['as' => 'contact.store']);
 $routes->get('/login', 'Login::index', ['as' => 'login']);
 $routes->post('/login', 'Login::store', ['as' => 'login.store']);
 $routes->get('/logout', 'Login::destroy');
