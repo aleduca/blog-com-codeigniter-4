@@ -8,17 +8,22 @@ class Trending extends BaseController
 {
   public function index()
   {
-    $post = new Post();
-    $posts = $post->select('
+
+    if (!$trendings = cache('trendings')) {
+      $post = new Post();
+      $trendings = $post->select('
       posts.title,posts.slug, users.firstName as userFirstName, users.lastName as userLastName
     ')->orderBy(
-      'visits',
-      'desc'
-    )->join(
-      'users',
-      'users.id = posts.user_id'
-    )->findAll(5);
+        'visits',
+        'desc'
+      )->join(
+        'users',
+        'users.id = posts.user_id'
+      )->findAll(5);
+      // Save into the cache for 5 minutes
+      cache()->save('trendings', $trendings, 300);
+    }
 
-    return view('_partials/_trending', ['posts' => $posts]);
+    return view('_partials/_trending', ['posts' => $trendings]);
   }
 }
