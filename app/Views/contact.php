@@ -16,10 +16,20 @@
 
     <?php if (session()->has('contact_not_sent')) : ?>
       <div class="text text-bg-danger text-center p-2 fs-3"><?php echo session()->get('contact_not_sent'); ?></div>
-
     <?php endif; ?>
+
+    <?php if (session()->has('messageThrottle')) : ?>
+      <span style="color:red;font-size:20px"><?php echo session()->getFlashdata('messageThrottle'); ?></span>
+    <?php endif; ?>
+
+    <?php if (session()->has('error')) : ?>
+      <span class="text text-bg-danger fs-3"><?php echo session()->get('error'); ?></span>
+    <?php endif; ?>
+
+
     <div class="form mt-5">
       <form action="<?php echo url_to('contact.store') ?>" method="post" role="form" class="php-email-form">
+        <?php echo csrf_field(); ?>
         <div class="row">
           <div class="form-group col-md-6">
             <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" value="Alexandre">

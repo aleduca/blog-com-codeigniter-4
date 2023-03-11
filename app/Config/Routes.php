@@ -49,9 +49,10 @@ $routes->post('/comment', 'Comment::store', ['as' => 'comment.store', 'filter' =
 $routes->get('/register', 'Register::index', ['as' => 'register']);
 $routes->post('/register', 'Register::store', ['as' => 'register.store']);
 $routes->get('/contact', 'Contact::index', ['as' => 'contact']);
-$routes->post('/contact', 'Contact::store', ['as' => 'contact.store']);
+$routes->post('/contact', 'Contact::store', ['as' => 'contact.store', 'filter' => 'csrfThrottle']);
+$routes->get('/profile', 'Profile::index', ['as' => 'profile']);
 $routes->get('/login', 'Login::index', ['as' => 'login']);
-$routes->post('/login', 'Login::store', ['as' => 'login.store']);
+$routes->post('/login', 'Login::store', ['as' => 'login.store', 'filter' => 'csrfThrottle']);
 $routes->get('/logout', 'Login::destroy');
 
 /*

@@ -22,6 +22,7 @@
                 <form method="post" action="<?php echo url_to('login.store'); ?>">
                   <p>Please login to your account</p>
 
+                  <?php echo csrf_field(); ?>
                   <div class="form-outline mb-4">
                     <?php echo session()->get('errors')['email'] ?? ''; ?>
                     <input type="email" name="email" id="form2Example11" class="form-control" placeholder="Phone number or email address" value="erik08@maldonado.com.br" />

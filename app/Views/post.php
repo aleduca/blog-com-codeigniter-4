@@ -91,8 +91,8 @@
           <!-- ======= Comments Form ======= -->
           <div class="row justify-content-center mt-5">
 
-            <?php if (session()->has('messageThrottleComment')) : ?>
-              <span style="color:red;font-size:20px"><?php echo session()->getFlashdata('messageThrottleComment'); ?></span>
+            <?php if (session()->has('messageThrottle')) : ?>
+              <span style="color:red;font-size:20px"><?php echo session()->getFlashdata('messageThrottle'); ?></span>
             <?php endif; ?>
 
             <?php if (session()->has('created')) : ?>

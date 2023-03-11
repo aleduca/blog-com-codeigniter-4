@@ -7,7 +7,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 
-class ThrottleComment implements FilterInterface
+class Throttler implements FilterInterface
 {
   /**
    * Do whatever processing this filter needs to do.
@@ -32,7 +32,7 @@ class ThrottleComment implements FilterInterface
     // per second across the entire site.
     if ($throttler->check(md5($request->getIPAddress()), 2, MINUTE) === false) {
       // return Services::response()->setStatusCode(429);
-      session()->setFlashdata('messageThrottleComment', 'Too many requests');
+      session()->setFlashdata('messageThrottle', 'Too many requests');
       return redirect()->back();
     }
   }

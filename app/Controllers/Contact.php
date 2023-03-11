@@ -28,10 +28,10 @@ class Contact extends BaseController
 
     $config = [
       'protocol' => 'smtp',
-      'SMTPHost' => 'sandbox.smtp.mailtrap.io',
-      'SMTPUser' => '62a10a41445609',
-      'SMTPPass' => 'b31431694ea877',
-      'SMTPPort' => 2525,
+      'SMTPHost' => $_ENV['EMAIL_HOST'],
+      'SMTPUser' => $_ENV['EMAIL_USER'],
+      'SMTPPass' => $_ENV['EMAIL_PASS'],
+      'SMTPPort' => $_ENV['EMAIL_PORT'],
       'wordWrap' => true,
       'mailType' => 'html',
       'charset' => 'utf-8'
@@ -53,12 +53,9 @@ class Contact extends BaseController
     $email->setSubject($this->request->getPost('subject'));
     $email->setMessage($template);
 
-    if ($email->send()) {
-      session()->setFlashdata('contact_sent', 'Email enviado com sucesso, responderemos em no máximo 24 horas.');
-    } else {
-      // var_dump($email->printDebugger());
+    ($email->send()) ?
+      session()->setFlashdata('contact_sent', 'Email enviado com sucesso, responderemos em no máximo 24 horas.') :
       session()->setFlashdata('contact_not_sent', 'Ocorreu um erro ao enviar o email, tente novamente em alguns segubndos');
-    }
 
     return redirect()->route('contact');
   }
