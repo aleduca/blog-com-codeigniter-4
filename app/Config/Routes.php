@@ -51,6 +51,7 @@ $routes->post('/register', 'Register::store', ['as' => 'register.store']);
 $routes->get('/contact', 'Contact::index', ['as' => 'contact']);
 $routes->post('/contact', 'Contact::store', ['as' => 'contact.store', 'filter' => 'csrfThrottle']);
 $routes->get('/profile', 'Profile::index', ['as' => 'profile']);
+$routes->post('/api/profile', 'Profile::store', ['as' => 'profile.store']);
 $routes->get('/login', 'Login::index', ['as' => 'login']);
 $routes->post('/login', 'Login::store', ['as' => 'login.store', 'filter' => 'csrfThrottle']);
 $routes->get('/logout', 'Login::destroy');
