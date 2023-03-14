@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\User;
 
 class Profile extends BaseController
 {
@@ -25,6 +26,19 @@ class Profile extends BaseController
       if (!$validated) {
         return $this->response->setJSON(['validate' => $this->validator->getErrors()])->setStatusCode(401);
       }
+
+      if ($data['id'] !== session()->get('user')->id) {
+        return $this->response->setJSON(['error', 'You can not change this user'])->setStatusCode(401);
+      }
+
+      if ((new User)->save($data)) {
+        $_SESSION['user']->firstName = $data['firstName'];
+        $_SESSION['user']->lastName = $data['lastName'];
+        $_SESSION['user']->email = $data['email'];
+        $_SESSION['user']->fullName = $data['firstName'] . ' ' . $data['lastName'];
+        return $this->response->setJson(['message' => 'Successfully updated'])->setStatusCode(200);
+      }
+      return $this->response->setJson(['error' => 'Not updated'])->setStatusCode(400);
     }
   }
 }

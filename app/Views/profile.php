@@ -85,19 +85,22 @@
         throw await response.json();
       }
 
-      console.log(response);
+      console.log(await response.json());
       btnUpdate.textContent = 'Update';
 
     } catch (error) {
+      console.log('error', error);
       if (error?.validate) {
         for (const key in error.validate) {
           const spanMessage = document.querySelector(`#error-${key}`);
           spanMessage.setAttribute('class', 'text text-danger fs-5');
           spanMessage.innerHTML = error.validate[key];
-          console.log(key);
         }
       }
-      console.log('error', error);
+
+      if (error?.error) {
+
+      }
       btnUpdate.textContent = 'Update';
     }
 
