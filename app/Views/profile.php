@@ -57,60 +57,8 @@
 </section>
 
 <?= $this->section('js') ?>
-<script>
-  const formUpdateProfile = document.querySelector('#form-update-profile');
-  const btnUpdate = document.querySelector('#btn-update');
-  formUpdateProfile.addEventListener('submit', async event => {
-    event.preventDefault();
-    btnUpdate.textContent = 'Aguarde, atualizando.';
-
-    const formData = new FormData(formUpdateProfile);
-
-    try {
-      const response = await fetch('/api/profile', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-          'X-CSRF-TOKEN': formData.get('csrf_test_name')
-        },
-        body: JSON.stringify({
-          id: formData.get('id'),
-          firstName: formData.get('firstName'),
-          lastName: formData.get('lastName'),
-          email: formData.get('email'),
-        })
-      })
-
-      if (!response.ok) {
-        throw await response.json();
-      }
-
-      console.log(await response.json());
-      btnUpdate.textContent = 'Update';
-
-    } catch (error) {
-      console.log('error', error);
-      if (error?.validate) {
-        for (const key in error.validate) {
-          const spanMessage = document.querySelector(`#error-${key}`);
-          spanMessage.setAttribute('class', 'text text-danger fs-5');
-          spanMessage.innerHTML = error.validate[key];
-        }
-      }
-
-      if (error?.message) {
-        console.log(error.message);
-      }
-
-      if (error?.error) {
-
-      }
-      btnUpdate.textContent = 'Update';
-    }
-
-  })
-</script>
+<script src="assets/js/sweetalert.js"></script>
+<script src="assets/js/profileUpdate.js"></script>
 <?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

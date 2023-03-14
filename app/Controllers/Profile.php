@@ -36,7 +36,7 @@ class Profile extends BaseController
         $_SESSION['user']->lastName = $data['lastName'];
         $_SESSION['user']->email = $data['email'];
         $_SESSION['user']->fullName = $data['firstName'] . ' ' . $data['lastName'];
-        return $this->response->setJson(['message' => 'Successfully updated'])->setStatusCode(200);
+        return $this->response->setJson(['message' => 'Os seus dados foram atualizado com sucesso'])->setStatusCode(200);
       }
       return $this->response->setJson(['error' => 'Not updated'])->setStatusCode(400);
     }
