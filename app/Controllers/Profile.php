@@ -28,7 +28,7 @@ class Profile extends BaseController
       }
 
       if ($data['id'] !== session()->get('user')->id) {
-        return $this->response->setJSON(['error', 'You can not change this user'])->setStatusCode(401);
+        return $this->response->setJSON(['error' => 'You can not change this user'])->setStatusCode(401);
       }
 
       if ((new User)->save($data)) {

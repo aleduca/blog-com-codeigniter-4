@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Filters\Throttler;
+use App\Filters\ThrottlerAjax;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -26,6 +27,9 @@ class Filters extends BaseConfig
     'secureheaders' => SecureHeaders::class,
     'csrfThrottle' => [
       CSRF::class, Throttler::class
+    ],
+    'csrfThrottleAjax' => [
+      CSRF::class, ThrottlerAjax::class
     ]
   ];
 

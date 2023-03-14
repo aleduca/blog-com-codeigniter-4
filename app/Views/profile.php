@@ -20,8 +20,8 @@
         <h2 class="mt-3">Profile</h2>
         <form id="form-update-profile">
           <input type="hidden" name="id" value="<?php echo session()->get('user')->id; ?>">
-          <!-- 2 column grid layout with text inputs for the first and last names -->
           <div class="row mb-4">
+            <?php echo csrf_field(); ?>
             <div class="col">
               <div class="form-outline">
                 <label class="form-label" for="form3Example1">First name</label>
@@ -71,7 +71,8 @@
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': formData.get('csrf_test_name')
         },
         body: JSON.stringify({
           id: formData.get('id'),
@@ -96,6 +97,10 @@
           spanMessage.setAttribute('class', 'text text-danger fs-5');
           spanMessage.innerHTML = error.validate[key];
         }
+      }
+
+      if (error?.message) {
+        console.log(error.message);
       }
 
       if (error?.error) {
