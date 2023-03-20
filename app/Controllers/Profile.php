@@ -12,7 +12,7 @@ class Profile extends BaseController
     return view('profile');
   }
 
-  public function store()
+  public function update()
   {
     if ($this->request->isAJAX()) {
       $data = json_decode(file_get_contents('php://input'), true);

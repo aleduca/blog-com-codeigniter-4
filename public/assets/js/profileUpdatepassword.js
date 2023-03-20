@@ -1,13 +1,13 @@
-const formUpdateProfile = document.querySelector("#form-update-profile");
-const btnUpdate = document.querySelector("#btn-update");
-formUpdateProfile.addEventListener("submit", async (event) => {
+const formUpdatePassword = document.querySelector("#form-update-password");
+const btnUpdatePassword = document.querySelector("#btn-update-password");
+formUpdatePassword.addEventListener("submit", async (event) => {
   event.preventDefault();
-  btnUpdate.textContent = "Aguarde, atualizando.";
+  btnUpdatePassword.textContent = "Aguarde, atualizando.";
 
-  const formData = new FormData(formUpdateProfile);
+  const formData = new FormData(formUpdatePassword);
 
   try {
-    const response = await fetch("/api/profile", {
+    const response = await fetch("/api/password", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -16,9 +16,9 @@ formUpdateProfile.addEventListener("submit", async (event) => {
       },
       body: JSON.stringify({
         id: formData.get("id"),
-        firstName: formData.get("firstName"),
-        lastName: formData.get("lastName"),
-        email: formData.get("email"),
+        password: formData.get("password"),
+        newPassword: formData.get("newPassword"),
+        confirmNewPassword: formData.get("confirmNewPassword"),
       }),
     });
 
@@ -38,7 +38,7 @@ formUpdateProfile.addEventListener("submit", async (event) => {
       );
     }
 
-    btnUpdate.textContent = "Update";
+    btnUpdatePassword.textContent = "Update";
   } catch (error) {
     console.log("error", error);
     if (error?.validate) {
@@ -48,7 +48,7 @@ formUpdateProfile.addEventListener("submit", async (event) => {
         spanMessage.innerHTML = error.validate[key];
 
         setTimeout(() => {
-          spanMessage.innerHTML = '';
+          spanMessage.innerHTML = "";
         }, 5000);
       }
     }
@@ -60,6 +60,6 @@ formUpdateProfile.addEventListener("submit", async (event) => {
     if (error?.error) {
       Swal.fire("Atenção", error.error, "error");
     }
-    btnUpdate.textContent = "Update";
+    btnUpdatePassword.textContent = "Update";
   }
 });

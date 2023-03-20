@@ -49,16 +49,49 @@
           <button type="submit" class="btn btn-primary btn-block mb-4" id="btn-update">Update</button>
         </form>
       </div>
-      <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">Password</div>
+      <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+        <h2 class="mt-3">Password</h2>
+        <form id="form-update-password">
+          <input type="hidden" name="id" value="<?php echo session()->get('user')->id; ?>">
+          <div class="row mb-4">
+            <?php echo csrf_field(); ?>
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="form3Example1">Actual password</label>
+                <input type="text" id="form3Example1" name="password" class="form-control" placeholder="Your current password" />
+                <span id="error-password"></span>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="form3Example2">Your new password</label>
+                <input type="text" id="form3Example2" name="newPassword" class="form-control" placeholder="Your new password" />
+                <span id="error-newPassword"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Confirm new password</label>
+            <input type="text" id="form3Example3" name="confirmNewPassword" class="form-control" placeholder="Confirm your current password" />
+            <span id="error-confirmNewPassword"></span>
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary btn-block mb-4" id="btn-update-password">Update</button>
+        </form>
+      </div>
       <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">Avatar</div>
     </div>
 
   </div>
-</section>
 
+</section>
 <?= $this->section('js') ?>
 <script src="assets/js/sweetalert.js"></script>
 <script src="assets/js/profileUpdate.js"></script>
+<script src="assets/js/profileUpdatePassword.js"></script>
 <?= $this->endSection() ?>
 
 <?= $this->endSection() ?>
