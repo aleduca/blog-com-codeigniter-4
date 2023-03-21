@@ -17,11 +17,8 @@ class Password extends BaseController
         'newPassword' => 'required',
         'confirmNewPassword' => 'required|matches[newPassword]'
       ], [
-        'newPassword' => [
-          'required' => 'O campo nova senha é obrigatório'
-        ],
         'confirmNewPassword' => [
-          'matches' => 'As senhas estão diferentes'
+          'matches' => 'As senhas não são iguais'
         ]
       ]);
 
@@ -36,18 +33,18 @@ class Password extends BaseController
       $user = new User();
       $userFound = $user->find($data['id']);
 
-      if ($userFound && !password_verify($data['password'], $userFound->password)) {
+      if (!password_verify($data['password'], $userFound->password)) {
         return $this->response->setJSON(['error' => 'Password not found'])->setStatusCode(401);
       }
 
       if ($user->save([
         'id' => $data['id'],
-        'password' => password_hash($data['newPassword'], PASSWORD_DEFAULT),
+        'password' => password_hash($data['newPassword'], PASSWORD_DEFAULT)
       ])) {
-        return $this->response->setJson(['message' => 'Password updated'])->setStatusCode(200);
+        return $this->response->setJSON(['message' => 'User password updated'])->setStatusCode(200);
       }
 
-      return $this->response->setJson(['error' => 'Not updated'])->setStatusCode(401);
+      return $this->response->setJSON(['error' => 'Not updated'])->setStatusCode(401);
     }
   }
 }
