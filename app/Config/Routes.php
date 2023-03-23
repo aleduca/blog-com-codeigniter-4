@@ -53,6 +53,7 @@ $routes->post('/contact', 'Contact::store', ['as' => 'contact.store', 'filter' =
 $routes->get('/profile', 'Profile::index', ['as' => 'profile']);
 $routes->put('/api/profile', 'Profile::update', ['as' => 'profile.update', 'filter' => 'csrfThrottleAjax']);
 $routes->put('/api/password', 'Password::update', ['as' => 'password.update', 'filter' => 'csrfThrottleAjax']);
+$routes->post('/api/avatar', 'Avatar::update', ['as' => 'avatar.update', 'filter' => 'csrfThrottleAjax']);
 $routes->get('/login', 'Login::index', ['as' => 'login']);
 $routes->post('/login', 'Login::store', ['as' => 'login.store', 'filter' => 'csrfThrottle']);
 $routes->get('/logout', 'Login::destroy');

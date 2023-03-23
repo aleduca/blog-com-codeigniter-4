@@ -82,7 +82,16 @@
           <button type="submit" class="btn btn-primary btn-block mb-4" id="btn-update-password">Update</button>
         </form>
       </div>
-      <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">Avatar</div>
+      <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
+        <h2>Avatar</h2>
+        <img src="" alt="" id="preview-image">
+        <form enctype="multipart/form-data" id="form-update-avatar">
+          <?php echo csrf_field(); ?>
+          <input type="hidden" name="id" value="<?php echo session()->get('user')->id; ?>">
+          <input type="file" id="avatar-image">
+          <button disabled id="btn-change-avatar">Change Avatar</button>
+        </form>
+      </div>
     </div>
 
   </div>
@@ -92,6 +101,7 @@
 <script src="assets/js/sweetalert.js"></script>
 <script src="assets/js/profileUpdate.js"></script>
 <script src="assets/js/profileUpdatePassword.js"></script>
+<script src="assets/js/profileUpdateAvatar.js"></script>
 <?= $this->endSection() ?>
 
 <?= $this->endSection() ?>

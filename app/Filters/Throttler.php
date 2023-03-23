@@ -30,7 +30,7 @@ class Throttler implements FilterInterface
 
     // Restrict an IP address to no more than 1 request
     // per second across the entire site.
-    if ($throttler->check(md5($request->getIPAddress()), 2, MINUTE) === false) {
+    if ($throttler->check(md5($request->getIPAddress()), 10, MINUTE) === false) {
       // return Services::response()->setStatusCode(429);
       session()->setFlashdata('messageThrottle', 'Too many requests');
       return redirect()->back();
