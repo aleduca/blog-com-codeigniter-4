@@ -25,7 +25,7 @@
                   <?php echo csrf_field(); ?>
                   <div class="form-outline mb-4">
                     <?php echo session()->get('errors')['email'] ?? ''; ?>
-                    <input type="email" name="email" id="form2Example11" class="form-control" placeholder="Phone number or email address" value="erik08@maldonado.com.br" />
+                    <input type="email" name="email" id="form2Example11" class="form-control" placeholder="Phone number or email address" value="ronaldo67@ig.com.br" />
                     <label class="form-label" for="form2Example11">Email</label>
                   </div>
 

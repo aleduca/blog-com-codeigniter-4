@@ -6,6 +6,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+*.task
 
 # OS X Thumbnails
 ._*

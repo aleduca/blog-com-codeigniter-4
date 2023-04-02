@@ -7,7 +7,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 
-class ThrottlerAjax implements FilterInterface
+class Auth implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -26,12 +26,13 @@ class ThrottlerAjax implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        $throttler = Services::throttler();
+        if (!session()->has('auth') || !session()->has('user')) {
+            if (request()->isAJAX()) {
+                return Services::response()->setJSON(['error' => 'Não autenticadoo'])->setStatusCode(401);
+                die();
+            }
 
-        // Restrict an IP address to no more than 1 request
-        // per second across the entire site.
-        if ($throttler->check(md5($request->getIPAddress()), 10, MINUTE) === false) {
-            return Services::response()->setJSON(['error' => 'Muitas tentativas,tente novamente em 1 minuto'])->setStatusCode(429);
+            return redirect()->route('home');
         }
     }
 
@@ -49,6 +50,6 @@ class ThrottlerAjax implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-    //
+        //
     }
 }

@@ -8,7 +8,7 @@ $routes = Services::routes();
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
 if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
-  require SYSTEMPATH . 'Config/Routes.php';
+    require SYSTEMPATH . 'Config/Routes.php';
 }
 
 /*
@@ -44,20 +44,26 @@ $routes->get('/recent', 'Recent::index');
 $routes->get('/category/partials/(:alpha)', 'CategoryHomePartials::index/$1');
 $routes->get('/category/(:any)', 'Category::index/$1');
 $routes->get('/post/(:any)', 'Post::index/$1');
-$routes->post('/api/reply', 'Reply::store');
 $routes->post('/comment', 'Comment::store', ['as' => 'comment.store', 'filter' => 'csrfThrottle']);
 $routes->get('/register', 'Register::index', ['as' => 'register']);
 $routes->post('/register', 'Register::store', ['as' => 'register.store']);
 $routes->get('/contact', 'Contact::index', ['as' => 'contact']);
 $routes->post('/contact', 'Contact::store', ['as' => 'contact.store', 'filter' => 'csrfThrottle']);
-$routes->get('/profile', 'Profile::index', ['as' => 'profile']);
-$routes->put('/api/profile', 'Profile::update', ['as' => 'profile.update', 'filter' => 'csrfThrottleAjax']);
-$routes->put('/api/password', 'Password::update', ['as' => 'password.update', 'filter' => 'csrfThrottleAjax']);
-$routes->post('/api/avatar', 'Avatar::update', ['as' => 'avatar.update', 'filter' => 'csrfThrottleAjax']);
+$routes->get('/profile', 'Profile::index', ['as' => 'profile', 'filter' => 'auth']);
 $routes->get('/login', 'Login::index', ['as' => 'login']);
 $routes->post('/login', 'Login::store', ['as' => 'login.store', 'filter' => 'csrfThrottle']);
 $routes->get('/logout', 'Login::destroy');
 
+$routes->group('api', ['filter' => 'auth'], function ($routes) {
+    $routes->put('profile', 'Profile::update', ['as' => 'profile.update', 'filter' => 'csrfThrottleAjax']);
+    $routes->put('password', 'Password::update', ['as' => 'password.update', 'filter' => 'csrfThrottleAjax']);
+    $routes->post('avatar', 'Avatar::update', ['as' => 'avatar.update', 'filter' => 'csrfThrottleAjax']);
+    $routes->post('/api/reply', 'Reply::store');
+});
+
+$routes->set404Override(function () {
+    return view('error404');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
@@ -72,5 +78,5 @@ $routes->get('/logout', 'Login::destroy');
  * needing to reload it.
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-  require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
