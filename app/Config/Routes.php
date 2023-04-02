@@ -58,7 +58,7 @@ $routes->group('api', ['filter' => 'auth'], function ($routes) {
     $routes->put('profile', 'Profile::update', ['as' => 'profile.update', 'filter' => 'csrfThrottleAjax']);
     $routes->put('password', 'Password::update', ['as' => 'password.update', 'filter' => 'csrfThrottleAjax']);
     $routes->post('avatar', 'Avatar::update', ['as' => 'avatar.update', 'filter' => 'csrfThrottleAjax']);
-    $routes->post('/api/reply', 'Reply::store');
+    $routes->post('reply', 'Reply::store');
 });
 
 $routes->set404Override(function () {
