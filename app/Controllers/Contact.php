@@ -2,61 +2,47 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
+use App\Libraries\Mail;
 
 class Contact extends BaseController
 {
-  public function index()
-  {
-    return view('contact');
-  }
-
-  public function store()
-  {
-
-    $validated = $this->validate([
-      'name' => 'required',
-      'email' => 'required|valid_email',
-      'subject' => 'required',
-      'message' => 'required',
-    ]);
-
-    if (!$validated) {
-      session()->setFlashdata('error', $this->validator->getErrors());
-      return redirect()->route('contact');
+    public function index()
+    {
+        return view('contact');
     }
 
-    $config = [
-      'protocol' => 'smtp',
-      'SMTPHost' => $_ENV['EMAIL_HOST'],
-      'SMTPUser' => $_ENV['EMAIL_USER'],
-      'SMTPPass' => $_ENV['EMAIL_PASS'],
-      'SMTPPort' => $_ENV['EMAIL_PORT'],
-      'wordWrap' => true,
-      'mailType' => 'html',
-      'charset' => 'utf-8'
-    ];
+    public function store()
+    {
+        $validated = $this->validate([
+            'name' => 'required',
+            'email' => 'required|valid_email',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
 
-    $email = \Config\Services::email();
+        if (!$validated) {
+            session()->setFlashdata('error', $this->validator->getErrors());
 
-    $email->initialize($config);
+            return redirect()->route('contact');
+        }
 
-    $email->setFrom($this->request->getPost('email'), $this->request->getPost('name'));
-    $email->setTo($_ENV['EMAIL_TO']);
+        $mail = new Mail;
+        $mail->setFrom([
+            'email' => $this->request->getPost('email'),
+            'name' => $this->request->getPost('name'),
+        ]);
+        $mail->setTo($_ENV['EMAIL_TO']);
+        $mail->setSubject((string)$this->request->getPost('subject'));
+        $mail->setTemplate('emails/contact', [
+            'name' => 'Alexandre Cardoso',
+            'from' => $this->request->getPost('email'),
+            'message' => strip_tags((string)$this->request->getPost('message')),
+        ]);
 
-    $template = view('emails/contact', [
-      'name' => 'Alexandre Cardoso',
-      'from' => $this->request->getPost('email'),
-      'message' => strip_tags((string)$this->request->getPost('message'))
-    ]);
+        ($mail->send()) ?
+          session()->setFlashdata('contact_sent', 'Email enviado com sucesso, responderemos em no máximo 24 horas.') :
+          session()->setFlashdata('contact_not_sent', 'Ocorreu um erro ao enviar o email, tente novamente em alguns segubndos');
 
-    $email->setSubject($this->request->getPost('subject'));
-    $email->setMessage($template);
-
-    ($email->send()) ?
-      session()->setFlashdata('contact_sent', 'Email enviado com sucesso, responderemos em no máximo 24 horas.') :
-      session()->setFlashdata('contact_not_sent', 'Ocorreu um erro ao enviar o email, tente novamente em alguns segubndos');
-
-    return redirect()->route('contact');
-  }
+        return redirect()->route('contact');
+    }
 }
