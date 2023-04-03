@@ -10,12 +10,12 @@ class Mail
     private Email $email;
     private ?string $template = null;
 
-    public function __construct()
+    public function __construct(string $mailType = 'html')
     {
-        $this->initialize();
+        $this->initialize($mailType);
     }
 
-    private function initialize()
+    private function initialize(string $mailType)
     {
         $this->email = \Config\Services::email();
 
@@ -27,7 +27,7 @@ class Mail
                 'SMTPPass' => $_ENV['EMAIL_PASS'],
                 'SMTPPort' => $_ENV['EMAIL_PORT'],
                 'wordWrap' => true,
-                'mailType' => 'html',
+                'mailType' => $mailType,
                 'charset' => 'utf-8',
             ]
         );
@@ -56,7 +56,7 @@ class Mail
 
     public function setMessage(string $message)
     {
-        if (!$this->template) {
+        if ($this->template) {
             throw new Exception('You already selected a template to send email');
         }
         $this->email->setMessage($message);

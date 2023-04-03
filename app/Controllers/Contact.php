@@ -26,7 +26,7 @@ class Contact extends BaseController
             return redirect()->route('contact');
         }
 
-        $mail = new Mail;
+        $mail = new Mail();
         $mail->setFrom([
             'email' => $this->request->getPost('email'),
             'name' => $this->request->getPost('name'),
@@ -38,6 +38,7 @@ class Contact extends BaseController
             'from' => $this->request->getPost('email'),
             'message' => strip_tags((string)$this->request->getPost('message')),
         ]);
+        // $mail->setMessage((string)$this->request->getPost('message'));
 
         ($mail->send()) ?
           session()->setFlashdata('contact_sent', 'Email enviado com sucesso, responderemos em no máximo 24 horas.') :
