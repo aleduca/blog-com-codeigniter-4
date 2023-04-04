@@ -139,6 +139,7 @@
 </section>
 
 <?= $this->section('js') ?>
+<script type="module" src="https://unpkg.com/@github/include-fragment-element"></script>
 <script src="/assets/js/replies.js"></script>
 <?= $this->endSection() ?>
 

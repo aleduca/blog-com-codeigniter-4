@@ -25,7 +25,7 @@
                   <?php echo csrf_field(); ?>
                   <div class="form-outline mb-4">
                     <?php echo session()->get('errors')['email'] ?? ''; ?>
-                    <input type="email" name="email" id="form2Example11" class="form-control" placeholder="Phone number or email address" value="luiz.prado@beltrao.net.br" />
+                    <input type="email" name="email" id="form2Example11" class="form-control" placeholder="Phone number or email address" value="aparecida09@martines.net" />
                     <label class="form-label" for="form2Example11">Email</label>
                   </div>
 
@@ -38,7 +38,7 @@
                   <div class="text-center pt-1 mb-5 pb-1">
                     <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submir">Log
                       in</button>
-                    <a class="text-muted" href="#!">Forgot password?</a>
+                    <a class="text-muted" href="/forgot/password">Forgot password?</a>
                   </div>
 
                   <div class="d-flex align-items-center justify-content-center pb-4">

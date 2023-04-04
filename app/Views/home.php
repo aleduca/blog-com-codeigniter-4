@@ -37,6 +37,8 @@
 
 <?= $this->section('js') ?>
 
+<script type="module" src="https://unpkg.com/@github/include-fragment-element"></script>
 <script type="module" src="/assets/js/loadHomeData.js"></script>
+
 
 <?= $this->endSection() ?>
