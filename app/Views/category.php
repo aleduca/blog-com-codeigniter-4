@@ -50,4 +50,8 @@
     </div>
 </section>
 
+<?= $this->section('js') ?>
+<script type="module" src="https://unpkg.com/@github/include-fragment-element"></script>
+<?= $this->endSection() ?>
+
 <?= $this->endSection() ?>
