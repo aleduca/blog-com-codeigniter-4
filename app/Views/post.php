@@ -16,7 +16,7 @@
         <!-- ======= Comments ======= -->
         <?php if ($comments) : ?>
           <div class="comments">
-            <h5 class="comment-title py-4">2 Comments</h5>
+            <h5 class="comment-title py-4"><?php echo $comments->total ?> Comments</h5>
             <?php foreach ($comments->comments as $comment) : ?>
               <div class="comment d-flex mb-4">
                 <div class="flex-shrink-0">
