@@ -23,7 +23,7 @@
                 <h3><a href="/post/<?php echo $post->slug ?>"><?php echo $post->title ?></a></h3>
                 <p><?php echo word_limiter($post->description, 20) ?></p>
                 <div class="d-flex align-items-center author">
-                  <div class="photo"><img src="<?php echo $post->avatar; ?>"" alt=" class="img-fluid"></div>
+                  <div class="photo"><img src="<?php echo $post->avatar; ?>" alt="" class="img-fluid"></div>
                   <div class="name">
                     <h3 class="m-0 p-0">
                       <?php echo $post->userFirstName ?> <?php echo $post->userLastName ?>
